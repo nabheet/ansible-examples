@@ -75,6 +75,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     #yum update -y
+    yum clean all
   SHELL
   
   config.vm.define :ansible_master, primary: true do | ansible_master |
