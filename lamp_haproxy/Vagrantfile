@@ -115,6 +115,7 @@ Vagrant.configure(2) do |config|
   end
   
   config.vm.define :nagios, primary: true do | nagios |
+    nagios.vm.box = "bento/centos-6.7"
     setup_instance(nagios, "nagios", "192.168.50.81")
   end
     

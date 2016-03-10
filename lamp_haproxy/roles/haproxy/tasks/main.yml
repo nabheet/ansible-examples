@@ -5,7 +5,7 @@
   yum: name={{ item }} state=present
   with_items:
   - haproxy
-  - socat
+  - socat-1.7.2.2
 
 - name: Configure the haproxy cnf file with hosts
   template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
