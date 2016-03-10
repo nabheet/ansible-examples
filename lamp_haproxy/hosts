@@ -1,12 +1,12 @@
 [webservers]
-web1
-web2
+192.168.50.61
+192.168.50.62
 
 [dbservers]
-db1
+192.168.50.71
 
 [lbservers]
-lb1
+192.168.50.51
 
 [monitoring]
-nagios
+192.168.50.81
