@@ -13,4 +13,7 @@
   when: sestatus.rc != 0
 
 - name: Copy the code from repository
-  git: repo={{ repository }} version={{ webapp_version }} dest=/var/www/html/
+  git: repo={{ repository }} force=yes version={{ webapp_version }} dest=/var/www/html/
+
+- name: Put ansible host in index.html
+  lineinfile: dest=/var/www/html/index.html regexp='<body>' line="{{ ansible_hostname }}"
