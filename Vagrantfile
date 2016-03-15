@@ -75,7 +75,7 @@ Vagrant.configure(2) do |config|
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
     #yum update -y
-    yum clean all
+    #yum clean all
   SHELL
   
   config.vm.define :ansible_master, primary: true do | ansible_master |
@@ -98,35 +98,45 @@ Vagrant.configure(2) do |config|
     SHELL
   end
 
-  config.vm.define :web01, primary: true do | web01 |
+  config.vm.define :web01 do | web01 |
     setup_instance(web01, "web01", "192.168.50.61")
   end
   
-  config.vm.define :web02, primary: true do | web02 |
+  config.vm.define :web02 do | web02 |
     setup_instance(web02, "web02", "192.168.50.62")
   end
   
-  config.vm.define :db01, primary: true do | db01 |
+  config.vm.define :db01 do | db01 |
     setup_instance(db01, "db01", "192.168.50.71")
   end
   
-  config.vm.define :lb01, primary: true do | lb01 |
+  config.vm.define :lb01 do | lb01 |
     setup_instance(lb01, "lb01", "192.168.50.51")
   end
   
-  config.vm.define :nagios, primary: true do | nagios |
+  config.vm.define :nagios do | nagios |
     nagios.vm.box = "bento/centos-6.7"
     setup_instance(nagios, "nagios", "192.168.50.81")
+  end
+  
+  config.vm.define :windows do | windows |
+    windows.vm.box = "https://ci_pull:ULrKBez7AH9pnaF6@artifactory.secureserver.net/artifactory/vagrant-vertigo-local/win2012R2-base.box"
+    windows.vm.network "private_network", ip: "192.168.50.91"
+    windows.vm.communicator = "winrm"
+    windows.winrm.username = "vagrant"
+    windows.winrm.password = "Testing123!"
+    windows.vm.network "forwarded_port", host: 33389, guest: 3389
+    name = "windows"
+    windows.vm.hostname = name
+    windows.vm.provider "virtualbox" do |vb|
+      vb.name = name
+    end
   end
     
   def setup_instance(instance, name, ip)
     instance.ssh.insert_key = false
     instance.vm.network "private_network", ip: ip
     instance.vm.hostname = name
-    instance.vm.provider "virtualbox" do |vb|
-      vb.name = name
-    end
-    
     instance.vm.provider "virtualbox" do |vb|
       vb.name = name
       vb.check_guest_additions = false
