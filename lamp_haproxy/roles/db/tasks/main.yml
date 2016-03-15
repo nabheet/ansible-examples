@@ -9,7 +9,7 @@
 
 - name: Configure SELinux to start mysql on any port
   seboolean: name=mariadb_connect_any state=true persistent=yes
-  when: "(sestatus.rc is defined) and (sestatus.rc != 0)"
+  when: "sestatus.rc != 0"
 
 - name: Create mariadb configuration file
   template: src=my.cnf.j2 dest=/etc/my.cnf
