@@ -99,24 +99,24 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.define :web01 do | web01 |
-    setup_instance(web01, "web01", "192.168.50.61")
+    setup_instance(web01, "web01-examples", "192.168.50.61")
   end
   
   config.vm.define :web02 do | web02 |
-    setup_instance(web02, "web02", "192.168.50.62")
+    setup_instance(web02, "web02-examples", "192.168.50.62")
   end
   
   config.vm.define :db01 do | db01 |
-    setup_instance(db01, "db01", "192.168.50.71")
+    setup_instance(db01, "db01-examples", "192.168.50.71")
   end
   
   config.vm.define :lb01 do | lb01 |
-    setup_instance(lb01, "lb01", "192.168.50.51")
+    setup_instance(lb01, "lb01-examples", "192.168.50.51")
   end
   
   config.vm.define :nagios do | nagios |
     nagios.vm.box = "bento/centos-6.7"
-    setup_instance(nagios, "nagios", "192.168.50.81")
+    setup_instance(nagios, "nagios-examples", "192.168.50.81")
   end
   
   config.vm.define :windows do | windows |
@@ -126,7 +126,7 @@ Vagrant.configure(2) do |config|
     windows.winrm.username = "vagrant"
     windows.winrm.password = "Testing123!"
     windows.vm.network "forwarded_port", host: 33389, guest: 3389
-    name = "windows"
+    name = "windows-examples"
     windows.vm.hostname = name
     windows.vm.provider "virtualbox" do |vb|
       vb.name = name
