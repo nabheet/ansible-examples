@@ -1,3 +1,6 @@
 alias deploy_local_haproxy="chmod -v 0600 /vagrant/insecure_private_key && time ansible-playbook -i /vagrant/lamp_haproxy_hosts.ini /vagrant/lamp_haproxy/site.yml -u vagrant --private-key=/vagrant/insecure_private_key"
 alias rolling_update_haproxy="chmod -v 0600 /vagrant/insecure_private_key && time ansible-playbook -i /vagrant/lamp_haproxy_hosts.ini /vagrant/lamp_haproxy/rolling_update.yml -u vagrant --private-key=/vagrant/insecure_private_key"
+alias windows_ping="time ansible-playbook -i /vagrant/windows_hosts.ini /vagrant/windows/ping.yml"
+alias windows_enable_iis="time ansible-playbook -i /vagrant/windows_hosts.ini /vagrant/windows/enable-iis.yml"
+alias windows_delpoy_site="time ansible-playbook -i /vagrant/windows_hosts.ini /vagrant/windows/deploy-site.yml"
 export ANSIBLE_HOST_KEY_CHECKING=False
