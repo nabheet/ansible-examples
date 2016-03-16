@@ -7,8 +7,12 @@
   tasks:
     - name: Install IIS
       win_feature:
-        name: "Web-Server"
+        name: "{{ item }}"
         state: present
         restart: yes
-        include_sub_features: yes
-        include_management_tools: yes
+      with_items:
+        - Web-WebServer
+        - Web-Static-Content
+        - Web-Http-Errors
+        - Web-Http-Logging
+        - Web-Asp-Net45
