@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
   SHELL
   
   config.vm.define :ansible_master, primary: true do | ansible_master |
-    vm_name = "ansible-master"
+    vm_name = "ansible-master-examples"
     ansible_master.vm.network "private_network", ip: "192.168.50.50"
     ansible_master.vm.hostname = vm_name
     ansible_master.vm.provider "virtualbox" do |vb|
